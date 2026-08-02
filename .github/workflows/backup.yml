@@ -1,0 +1,34 @@
+name: Backup Diario PostgreSQL
+
+on:
+  schedule:
+    # Ejecutar todos los días a las 3:00 AM UTC
+    - cron: '0 3 * * *'
+  workflow_dispatch: # Permitir ejecución manual
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Instalar cliente PostgreSQL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Ejecutar pg_dump
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          FECHA=$(date +%Y-%m-%d_%H%M%S)
+          ARCHIVO="hostal-backup-${FECHA}.sql"
+          pg_dump "${SUPABASE_DB_URL}" --no-owner --no-acl -f "${ARCHIVO}"
+          gzip "${ARCHIVO}"
+          echo "BACKUP_FILE=${ARCHIVO}.gz" >> $GITHUB_ENV
+
+      - name: Subir respaldo como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: hostal-backup-${{ github.run_id }}
+          path: "*.sql.gz"
+          retention-days: 30

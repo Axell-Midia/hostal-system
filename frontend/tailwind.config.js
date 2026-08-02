@@ -1,0 +1,97 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        terracotta: {
+          50: '#fef7ee',
+          100: '#fdedd7',
+          200: '#f9d7ae',
+          300: '#f5b97a',
+          400: '#f09344',
+          500: '#ec7a1f',
+          600: '#d96115',
+          700: '#b44913',
+          800: '#903a17',
+          900: '#743215',
+        },
+        deep: {
+          DEFAULT: '#171717',
+          50: '#f6f6f6',
+          100: '#e7e7e7',
+          200: '#d1d1d1',
+          300: '#b0b0b0',
+          400: '#888888',
+          500: '#6d6d6d',
+          600: '#5d5d5d',
+          700: '#4f4f4f',
+          800: '#3d3d3d',
+          900: '#171717',
+        },
+        sand: {
+          DEFAULT: '#F5F0EB',
+          50: '#FDFCFA',
+          100: '#FAF8F5',
+          200: '#F5F0EB',
+          300: '#E8DFD5',
+          400: '#D4C5B5',
+          500: '#B8A590',
+        },
+        sage: {
+          50: '#ecfdf5',
+          100: '#d1fae5',
+          200: '#a7f3d0',
+          300: '#6ee7b7',
+          400: '#34d399',
+          500: '#10b981',
+          600: '#059669',
+          700: '#047857',
+          800: '#065f46',
+          900: '#064e3b',
+        },
+        clay: {
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#ef4444',
+          600: '#dc2626',
+          700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
+        },
+        ocean: {
+          500: '#0ea5e9',
+          600: '#0284c7',
+        },
+        amber: {
+          500: '#f59e0b',
+          600: '#d97706',
+        },
+        violet: {
+          500: '#8b5cf6',
+          600: '#7c3aed',
+        },
+        rose: {
+          500: '#f43f5e',
+          600: '#e11d48',
+        },
+      },
+      fontFamily: {
+        display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+        body: ['"DM Sans"', 'system-ui', 'sans-serif'],
+      },
+      boxShadow: {
+        'warm-sm': '0 1px 3px 0 rgba(180, 160, 140, 0.08), 0 1px 2px -1px rgba(180, 160, 140, 0.06)',
+        'warm': '0 4px 6px -1px rgba(180, 160, 140, 0.08), 0 2px 4px -2px rgba(180, 160, 140, 0.05)',
+        'warm-md': '0 10px 15px -3px rgba(180, 160, 140, 0.08), 0 4px 6px -4px rgba(180, 160, 140, 0.05)',
+      },
+    },
+  },
+  plugins: [],
+}
