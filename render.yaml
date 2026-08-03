@@ -1,0 +1,72 @@
+# render.yaml — Despliegue en Render (pruebas gratuitas)
+# Aplicativo para Render's Proyecto Hostal
+# Backend (Spring Boot) + Frontend (React estático) + PostgreSQL gestionada.
+# NOTA: no modifica tu docker-compose.yml. Este archivo es ADICIONAL (para Render).
+
+databases:
+  - name: hostal-db
+    plan: free
+    databaseName: hostal
+    user: hostal
+    postgresMajorVersion: "15"
+
+services:
+  # -------------- Backend (Spring Boot) --------------
+  - type: web
+    name: hostal-backend
+    runtime: docker
+    plan: free
+    branch: master
+    autoDeploy: true
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: DB_HOST
+        fromDatabase:
+          name: hostal-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: hostal-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: hostal-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: hostal-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: hostal-db
+          property: password
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SWAGGER_ENABLED
+        value: "false"
+      # Rellenar en el Dashboard: la URL del frontend, p.ej. https://hostal-frontend.onrender.com
+      - key: CORS_ORIGINS
+        sync: false
+
+  # -------------- Frontend (React estático) --------------
+  - type: web
+    name: hostal-frontend
+    runtime: static
+    plan: free
+    branch: master
+    autoDeploy: true
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      # Rellenar en el Dashboard con la URL del backend, p. ej. https://hostal-backend.onrender.com
+      - key: VITE_API_URL
+        sync: false
