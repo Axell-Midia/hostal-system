@@ -56,7 +56,6 @@ services:
   - type: web
     name: hostal-frontend
     runtime: static
-    plan: free
     branch: master
     autoDeploy: true
     rootDir: frontend
