@@ -15,9 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneOffset;
 import java.util.List;
 
 @RestController
@@ -38,8 +37,8 @@ public class ReporteController {
             @RequestParam(required = false) String hasta) {
 
         Long userId = resolveUserId();
-        Instant desdeInstant = parseOrDefault(desde, LocalDate.now().atStartOfDay(ZoneOffset.UTC).toInstant());
-        Instant hastaInstant = parseOrDefault(hasta, Instant.now());
+        Instant desdeInstant = parseOrDefault(desde, Instant.EPOCH);
+        Instant hastaInstant = parseOrDefault(hasta, Instant.now().plus(Duration.ofDays(3650)));
 
         return ResponseEntity.ok(reporteService.reportePorRango(userId, desdeInstant, hastaInstant));
     }
@@ -53,8 +52,8 @@ public class ReporteController {
             @RequestParam(required = false) String hasta) {
 
         Long userId = resolveUserId();
-        Instant desdeInstant = parseOrDefault(desde, LocalDate.now().atStartOfDay(ZoneOffset.UTC).toInstant());
-        Instant hastaInstant = parseOrDefault(hasta, Instant.now());
+        Instant desdeInstant = parseOrDefault(desde, Instant.EPOCH);
+        Instant hastaInstant = parseOrDefault(hasta, Instant.now().plus(Duration.ofDays(3650)));
 
         return ResponseEntity.ok(reporteService.reporteIngresosPorTipoHabitacion(userId, desdeInstant, hastaInstant));
     }
@@ -68,8 +67,8 @@ public class ReporteController {
             @RequestParam(required = false) String hasta) {
 
         Long userId = resolveUserId();
-        Instant desdeInstant = parseOrDefault(desde, LocalDate.now().atStartOfDay(ZoneOffset.UTC).toInstant());
-        Instant hastaInstant = parseOrDefault(hasta, Instant.now());
+        Instant desdeInstant = parseOrDefault(desde, Instant.EPOCH);
+        Instant hastaInstant = parseOrDefault(hasta, Instant.now().plus(Duration.ofDays(3650)));
 
         return ResponseEntity.ok(reporteService.reporteEgresosPorCategoria(userId, desdeInstant, hastaInstant));
     }
@@ -85,8 +84,8 @@ public class ReporteController {
             @RequestParam(required = false) String hasta) {
 
         Long userId = resolveUserId();
-        Instant desdeInstant = parseOrDefault(desde, LocalDate.now().atStartOfDay(ZoneOffset.UTC).toInstant());
-        Instant hastaInstant = parseOrDefault(hasta, Instant.now());
+        Instant desdeInstant = parseOrDefault(desde, Instant.EPOCH);
+        Instant hastaInstant = parseOrDefault(hasta, Instant.now().plus(Duration.ofDays(3650)));
 
         String csv = reporteService.exportarCsv(userId, tipo, desdeInstant, hastaInstant);
 

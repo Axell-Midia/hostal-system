@@ -13,9 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneOffset;
 
 @RestController
 @RequestMapping("/api/dashboard")
@@ -35,8 +34,8 @@ public class DashboardController {
             @RequestParam(required = false) String hasta) {
 
         Long userId = resolveUserId();
-        Instant desdeInstant = parseOrDefault(desde, LocalDate.now().atStartOfDay(ZoneOffset.UTC).toInstant());
-        Instant hastaInstant = parseOrDefault(hasta, Instant.now());
+        Instant desdeInstant = parseOrDefault(desde, Instant.EPOCH);
+        Instant hastaInstant = parseOrDefault(hasta, Instant.now().plus(Duration.ofDays(3650)));
 
         return ResponseEntity.ok(dashboardService.obtenerResumen(userId, desdeInstant, hastaInstant));
     }

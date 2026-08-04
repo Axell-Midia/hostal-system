@@ -82,10 +82,10 @@ export default function ReportesPage() {
       <div className="flex flex-wrap items-center justify-between gap-4 no-print">
         <h2 className="text-lg font-semibold text-deep font-display">Reportes</h2>
         <div className="flex gap-2">
-          <button onClick={handleExportCsv} className="btn-secondary">
+          <button onClick={handleExportCsv} className="btn-secondary hidden">
             Exportar CSV
           </button>
-          <button onClick={handlePrint} className="btn-secondary">
+          <button onClick={handlePrint} className="btn-secondary hidden">
             Imprimir
           </button>
         </div>
