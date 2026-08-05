@@ -1,4 +1,4 @@
--- ============================================================
+﻿-- ============================================================
 -- Sistema de Gestión Administrativa - Hostal
 -- Schema SQL + Seed Data
 -- ============================================================
@@ -120,8 +120,8 @@ INSERT INTO sede (id, nombre) VALUES
 -- norte123  -> BCrypt hash
 -- Estas contraseñas son para desarrollo/testing. Regenerar en producción.
 INSERT INTO usuario (id, username, password_hash, nombre_completo, id_sede, activo) VALUES
-    (1, 'centro', '$2a$10$8KxVhGpOGRqJqg7YFJXBO.Wd4sOCfGM7xSBqvCgattJVW9.nXDTmS', 'Recepcionista Centro', 1, TRUE),
-    (2, 'norte',  '$2a$10$Q7FRdlwLMKX3tBPSzRv5XuJGmqXUFDp5pGjRfOxEkWJbZ.1BSXS3e',  'Recepcionista Norte',  2, TRUE);
+    (1, 'centro', '$2a$10$YeLbuFvpLVp1wNEdPEIc3eVoycGtkNuWRG1d/lnQivo0aiiZkvCrK', 'Recepcionista Centro', 1, TRUE),
+    (2, 'norte',  '$2a$10$dwvVIO5DVMVk2RzIPLmD7uf7DM4Wi1fESK2t/Of/1M90BpXn2a/3i',  'Recepcionista Norte',  2, TRUE);
 
 -- Resetear secuencias
 SELECT setval('sede_id_seq', 2);
